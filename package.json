@@ -1,0 +1,10 @@
+{
+  "name": "libros-angular",
+  "description": "Búsqueda de libros - client side en Angular",
+  "author": "",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "4.0.0-alpha.6",
+    "jquery": "3.2.1"
+  }
+}
