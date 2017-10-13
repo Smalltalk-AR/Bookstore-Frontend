@@ -15,7 +15,8 @@ angular.module('booksApp')
 	}
 	this.addBook = function(){
 		BooksService.addBook($scope.book,function(response){
-		$scope.books.push($scope.book);
+		alert(response.data.id);
+		$scope.books.push(response.data);
 		$scope.book={};
 		$('#bookModal').modal('hide')
 	},function(response){
@@ -23,7 +24,7 @@ angular.module('booksApp')
 	});
 	}
 	this.deleteBook=function(book){
-	if (confirm('Really delete this Book?')) {
+	if (confirm('Really delete this Book?'+book.id)) {
 
 		BooksService.deleteBook(book,function(response){
 		$scope.books.splice($scope.books.indexOf(book),1);
