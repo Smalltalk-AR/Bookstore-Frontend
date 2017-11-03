@@ -18,5 +18,5 @@ angular.module('bookStoreApp')
         this.editAuthor = function(oldAuthor, author, onSuccess, onFail) {
             return $http.put(urlBase + '/persons/' + oldAuthor.id, author).then(onSuccess, onFail);
         };
-        
+
     });

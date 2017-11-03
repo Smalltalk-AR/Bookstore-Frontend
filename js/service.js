@@ -1,8 +1,10 @@
 angular.module('bookStoreApp')
-.service('BooksService',function($http){
+.service('BookStoreService',function($http){
     var urlBase = 'http://localhost:1710';
-	this.allBooks=function(onSuccess, onFail){
-		return $http.get(urlBase+'/books').then(onSuccess,onFail);        
+
+    <!--Servicio para los libros -->
+  this.allBooks=function(onSuccess, onFail){
+		return $http.get(urlBase+'/books').then(onSuccess,onFail);
 };
     this.addBook= function (book,onSuccess,onFail){
         return $http.post(urlBase+'/books',book).then(onSuccess,onFail);
@@ -12,10 +14,12 @@ angular.module('bookStoreApp')
         return $http.delete(urlBase+'/books/'+book.id,book).then(onSuccess,onFail);
     };
     this.editBook= function (oldBook,book,onSuccess,onFail){
- 
+
         return $http.put(urlBase+'/books/'+oldBook.id,book).then(onSuccess,onFail);
     };
-  
+
+
+  <!--Servicio para los autores -->
     this.allAuthors = function(onSuccess, onFail) {
         return $http.get(urlBase + '/persons').then(onSuccess, onFail);
     };
@@ -31,6 +35,5 @@ angular.module('bookStoreApp')
     this.editAuthor = function(oldAuthor, author, onSuccess, onFail) {
         return $http.put(urlBase + '/persons/' + oldAuthor.id, author).then(onSuccess, onFail);
     };
-    
-});
 
+});

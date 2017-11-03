@@ -1,11 +1,10 @@
 angular.module('bookStoreApp')
-.controller('AllBooksCtrl',function ($scope,BooksService) {
+.controller('bookStoreController',function ($scope,BookStoreService) {
 
 	this.book={};
 	$scope.isEditing=false;
-	
-	 
-	BooksService.allBooks (function(response){
+
+	BookStoreService.allBooks (function(response){
 			$scope.books = response.data;
 	}, function(response){
 		alert ("Error: "+response)});
@@ -14,24 +13,23 @@ angular.module('bookStoreApp')
 	this.addOrEditBook = function(){
 		$scope.isEditing ? this.editBook() : this.addBook()
 	}
-	
+
 	this.addBook = function(){
-		BooksService.addBook($scope.book,function(response){
-		alert(response.data.id);
+		BookStoreService.addBook($scope.book,function(response){
 		$scope.books.push(response.data);
 		$scope.book={};
 		$('#bookModal').modal('hide')
 	},function(response){
-		alert("Error: "+response)
+		alert("Error: "+ response)
 	});
 	}
 
 	this.deleteBook=function(book){
 	if (confirm('Really delete this Book?'+book.id)) {
 
-		BooksService.deleteBook(book,function(response){
+		BookStoreService.deleteBook(book,function(response){
 		$scope.books.splice($scope.books.indexOf(book),1);
-		
+
 	    },function(response){
 			alert("Error: "+response)
 		});
@@ -52,7 +50,7 @@ angular.module('bookStoreApp')
 	}
 
 	this.editBook = function(){
-		BooksService.editBook($scope.oldBook,$scope.book,function(response){
+		BookStoreService.editBook($scope.oldBook,$scope.book,function(response){
 		$scope.book={};
 		$scope.oldBook={}
 		$('#bookModal').modal('hide');
@@ -61,7 +59,5 @@ angular.module('bookStoreApp')
 		alert("Error: "+response)
 	});
 	}
-	
+
 });
-  
-  
