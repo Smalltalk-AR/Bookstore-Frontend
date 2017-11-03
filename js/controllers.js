@@ -1,5 +1,6 @@
-angular.module('booksApp')
+angular.module('bookStoreApp')
 .controller('AllBooksCtrl',function ($scope,BooksService) {
+
 	this.book={};
 	$scope.isEditing=false;
 	
@@ -13,6 +14,7 @@ angular.module('booksApp')
 	this.addOrEditBook = function(){
 		$scope.isEditing ? this.editBook() : this.addBook()
 	}
+	
 	this.addBook = function(){
 		BooksService.addBook($scope.book,function(response){
 		alert(response.data.id);
@@ -23,6 +25,7 @@ angular.module('booksApp')
 		alert("Error: "+response)
 	});
 	}
+
 	this.deleteBook=function(book){
 	if (confirm('Really delete this Book?'+book.id)) {
 
@@ -43,9 +46,11 @@ angular.module('booksApp')
 		$('#exampleModalLongTitle').text("Edit Book");
 		$('#bookModal').modal('show');
 	}
+
 	this.cancelChangesIfEditing= function(){
 		//borrar cambios
 	}
+
 	this.editBook = function(){
 		BooksService.editBook($scope.oldBook,$scope.book,function(response){
 		$scope.book={};

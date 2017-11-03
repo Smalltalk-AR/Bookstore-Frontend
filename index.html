@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="booksApp">
+<html lang="en" ng-app="bookStoreApp">
 <head>
   <meta charset="utf-8">
   <title>Ejemplo de Libros en Angular</title>
@@ -21,7 +21,8 @@
   
   <!-- Importamos los archivos extras que vamos a usar -->
   <script src="js/app.js"></script>  
-  <script src="js/service.js"></script>  
+  <script src="js/service.js"></script>
+  <script src="js/authorsController.js"></script> 
   <script src="js/controllers.js"></script>  
 </head>
 <body ng-controller="AllBooksCtrl as allBooks">
@@ -30,6 +31,7 @@
 		<span class="buscarLibros">Buscar:</span> 
 		<input ng-model="allBooks.wantedBook" class="filtroLibros">
 	</div> 
+
 		<!-- Button trigger modal (Add Book) -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookModal">
   +
@@ -48,12 +50,42 @@
 			<td>{{book.title}}</td>
 			<td>{{book.author}}</td>
 			<td>{{book.editorial}}</td>
-			<td>{{book.year}}</td>
+			<td>{{book.releaseYear}}</td>
 			<td><a class="btn btn-primary" ng-click="allBooks.startEditingBook(book)">Edit</a></td>
      		<td><a class="btn btn-danger"  ng-click="allBooks.deleteBook(book)">Delete</a></td>
 		</tr>
 	</table>
 
+
+  <!--Authors filter -->
+  <div ng-controller="allAuthorsController as authors" class="filtro">
+    <span class="buscarAutores">Buscar:</span> 
+    <input ng-model="authors.wantedAuthor" class="filtroLibros">
+  </div> 
+ 
+     <!-- Button trigger modal (Add Author) -->
+<div ng-controller="allAuthorsController as authors">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#authorModal">
+  +
+</button>
+</br>
+   <table class="tablaAutores">
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Pais</th>
+    </tr>
+    <tr ng-repeat="author in authors  | filter:allAuthors.wantedAuthor track by $index">
+      <td>{{author.id}}</td>
+      <td>{{author.firstName}}</td>
+      <td>{{author.lastName}}</td>
+      <td>{{author.country}}</td>
+      <td><a class="btn btn-primary" ng-click="allAuthors.startEditingAuthor(author)">Editar</a></td>
+        <td><a class="btn btn-danger"  ng-click="allAuthors.deleteAuthors(author)">Eliminar</a></td>
+    </tr>
+  </table>
+</div>
 
 <!-- Modal (Add Book) -->
 <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -77,12 +109,43 @@
 		<input ng-model="book.editorial" class="filtroLibros"></br>
 
 		<span class="buscarLibros">Año:</span> 
-		<input ng-model="book.year" class="filtroLibros"></br>
+		<input ng-model="book.releaseYear" class="filtroLibros"></br>
       
       </div>
       <div class="modal-footer" >
         <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="allBooks.cancelChangesIfEditing()">Close</button>
         <button type="button" id="okButton" class="btn btn-primary" ng-click="allBooks.addOrEditBook()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal (Add Author) -->
+<div class="modal fade" id="authorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="authorModalTitle">Agregar Autor</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="allAuthors.cancelChangesIfEditing()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <span class="buscarAutores">Nombre:</span> 
+    <input ng-model="author.firstName" class="filtroAutores"></br>
+
+    <span class="buscarAutores">Apellido</span> 
+    <input ng-model="author.lastName" class="filtroAutores"></br>
+
+    <span class="buscarAutores">País</span> 
+    <input ng-model="author.country" class="filtroAutores"></br>
+      
+      </div>
+      <div class="modal-footer" >
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="allAuthors.cancelChangesIfEditing()">Cancelar</button>
+        <button type="button" id="addAuthorButton" class="btn btn-primary" ng-click="allAuthors.addOrEditAuthor()">Guardar</button>
       </div>
     </div>
   </div>
