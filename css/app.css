@@ -1,6 +1,10 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
+
 body{
-	font-family: verdana,arial,sans-serif;
+	font-family: "Poppins", verdana,arial,sans-serif;
 	font-size:11px;
+	margin-top: 20px;
+	margin-left: 100px;
 }
 
 .filtro{
@@ -8,14 +12,18 @@ body{
 	border-color: #666666;
 	width: 250px;
 	margin-top: 10px;
-	margin-bottom: 10px; 
-	padding-top: 5px; 
+	margin-bottom: 10px;
+	padding-top: 5px;
 	padding-bottom: 5px;
 	padding-left: 5px;
 	padding-right: 5px;
 	background: #dedede;
+	display: block;
 }
 
+.tablas{
+	display: block;
+}
 .filtroLibros{
 	width:200px;
 }

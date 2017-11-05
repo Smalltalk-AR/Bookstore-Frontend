@@ -2,7 +2,7 @@
 <html lang="en" ng-app="bookStoreApp">
 <head>
   <meta charset="utf-8">
-  <title>Ejemplo de Libros en Angular</title>
+  <title>Book Store</title>
   <link rel="stylesheet" href="css/app.css"/>
   <!-- Agregamos angular para que funcione  -->
   <script src="../node_modules/angular/angular.min.js"></script>
@@ -25,28 +25,29 @@
   <script src="js/authorsController.js"></script>
   <script src="js/controllers.js"></script>
 </head>
+<header id="header">
+       <div class="logo"><a>Book Store <span>powered by Smalltalk</span></a></div>
 <body ng-controller="bookStoreController as bookStore">
-
+<div class="primer-tabla">
 	<div class="filtro">
 		<span class="buscarLibros">Buscar:</span>
 		<input ng-model="bookStore.wantedBook" class="filtroLibros">
 	</div>
 
 		<!-- Button trigger modal (Add Book) -->
+    <div class="tablas">
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookModal">
   +
 </button>
 </br>
 	 <table class="tablaLibros">
 	 	<tr>
-			<th>Id</th>
 	 		<th>Titulo</th>
 	 		<th>Autor</th>
 	 		<th>Editorial</th>
 	 		<th>Año</th>
 	 	</tr>
 		<tr ng-repeat="book in books  | filter:bookStore.wantedBook track by $index">
-			<td>{{book.id}}</td>
 			<td>{{book.title}}</td>
 			<td>{{book.author}}</td>
 			<td>{{book.editorial}}</td>
@@ -55,38 +56,37 @@
      		<td><a class="btn btn-danger"  ng-click="bookStore.deleteBook(book)">Delete</a></td>
 		</tr>
 	</table>
-
-
+</div>
+</div>
   <!--Authors filter -->
 <div ng-controller="allAuthorsController as authController">
-
-  <div class="filtroAutores">
-    <span class="buscarAutores">Buscar:</span>
+<div class="segunda-tabla">
+  <div class="filtro">
+    <span class="buscarLibros">Buscar:</span>
     <input ng-model="authController.wantedAuthor" class="filtroAutores">
   </div>
 
      <!-- Button trigger modal (Add Author) -->
-<div>
+<div class="tablas">
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#authorModal">
   +
 </button>
 </br>
    <table class="tablaAutores">
     <tr>
-      <th>Id</th>
       <th>Nombre</th>
       <th>Apellido</th>
       <th>Pais</th>
     </tr>
-    <tr ng-repeat="author in authors  | filter:allAuthors.wantedAuthor track by $index">
-      <td>{{author.id}}</td>
+    <tr ng-repeat="author in authors  | filter:authController.wantedAuthor track by $index">
       <td>{{author.firstName}}</td>
       <td>{{author.lastName}}</td>
       <td>{{author.country}}</td>
-      <td><a class="btn btn-primary" ng-click="allAuthors.startEditingAuthor(author)">Editar</a></td>
-        <td><a class="btn btn-danger"  ng-click="allAuthors.deleteAuthors(author)">Eliminar</a></td>
+      <td><a class="btn btn-primary" ng-click="authController.startEditingAuthor(author)">Editar</a></td>
+        <td><a class="btn btn-danger"  ng-click="authController.deleteAuthor(author)">Eliminar</a></td>
     </tr>
   </table>
+</div>
 </div>
 </div>
 
@@ -106,7 +106,19 @@
 		<input ng-model="book.title" class="filtroLibros"></br>
 
 		<span class="buscarLibros">Autor:</span>
-		<input ng-model="book.author" class="filtroLibros"></br>
+    <div class="dropdown" ng-controller="allAuthorsController as authController">
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		Autor
+	</button>
+	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+		<li ng-repeat="author in authors" role="presentation" data-toggle="modal">
+			<a role="menuitem" tabindex="-1" ng-click="bookStore.setAuthorToBook(author)">
+				{{author.firstName}}
+			</a>
+		</li>
+	</ul>
+</div>
+
 
 		<span class="buscarLibros">Editorial:</span>
 		<input ng-model="book.editorial" class="filtroLibros"></br>

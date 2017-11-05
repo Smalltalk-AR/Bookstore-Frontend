@@ -3,12 +3,12 @@ angular.module('bookStoreApp')
 
 	this.author= {};
 	this.isEditingAuthor= false;
+	$scope.selectedAuthor= {};
 
 	BookStoreService.allAuthors (function(response){
 			$scope.authors = response.data;
 	}, function(response){
 		alert ("Error: "+response)});
-
 
 	this.addOrEditAuthor = function(){
 		$scope.isEditingAuthor ? this.editAuthor() : this.addAuthor()
@@ -25,7 +25,7 @@ angular.module('bookStoreApp')
 	}
 
 	this.deleteAuthor=function(author){
-	if (confirm('¿Realmente desea eliminar este autor?'+author.firstName + author.lastName)) {
+	if (confirm('¿Realmente desea eliminar este autor?'+author.firstName +' '+ author.lastName)) {
 
 		BookStoreService.deleteAuthor(author,function(response){
 		$scope.authors.splice($scope.authors.indexOf(author),1);

@@ -13,6 +13,9 @@ angular.module('bookStoreApp')
 	this.addOrEditBook = function(){
 		$scope.isEditing ? this.editBook() : this.addBook()
 	}
+	this.setAuthorToBook = function(author){
+		$scope.book.author = author;
+	}
 
 	this.addBook = function(){
 		BookStoreService.addBook($scope.book,function(response){
