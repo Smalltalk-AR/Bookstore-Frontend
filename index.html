@@ -43,13 +43,13 @@
 	 <table class="tablaLibros">
 	 	<tr>
 	 		<th>Titulo</th>
-	 		<th>Autor</th>
+	 		<!--<th>Autor</th>-->
 	 		<th>Editorial</th>
 	 		<th>Año</th>
 	 	</tr>
 		<tr ng-repeat="book in books  | filter:bookStore.wantedBook track by $index">
 			<td>{{book.title}}</td>
-			<td>{{book.author}}</td>
+			<!--<td>{{book.author}}</td>-->
 			<td>{{book.editorial}}</td>
 			<td>{{book.releaseYear}}</td>
 			<td><a class="btn btn-primary" ng-click="bookStore.startEditingBook(book)">Edit</a></td>
@@ -112,7 +112,7 @@
 	</button>
 	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 		<li ng-repeat="author in authors" role="presentation" data-toggle="modal">
-			<a role="menuitem" tabindex="-1" ng-click="bookStore.setAuthorToBook(author)">
+			<a role="menuitem" tabindex="-1" ng-click="allAuthorsController.addBook(author)">
 				{{author.firstName}}
 			</a>
 		</li>
@@ -153,10 +153,10 @@
         <span class="buscarAutores">Nombre:</span>
     <input ng-model="author.firstName" class="filtroAutores"></br>
 
-    <span class="buscarAutores">Apellido</span>
+    <span class="buscarAutores">Apellido:</span>
     <input ng-model="author.lastName" class="filtroAutores"></br>
 
-    <span class="buscarAutores">País</span>
+    <span class="buscarAutores">País:</span>
     <input ng-model="author.country" class="filtroAutores"></br>
 
       </div>
