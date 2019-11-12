@@ -21,19 +21,19 @@ angular.module('bookStoreApp')
 
   <!--Servicio para los autores -->
     this.allAuthors = function(onSuccess, onFail) {
-        return $http.get(urlBase + '/persons').then(onSuccess, onFail);
+        return $http.get(urlBase + '/authors').then(onSuccess, onFail);
     };
 
     this.addAuthor = function(author, onSuccess, onFail) {
-        return $http.post(urlBase + '/persons', author).then(onSuccess, onFail);
+        return $http.post(urlBase + '/authors', author).then(onSuccess, onFail);
     };
 
     this.deleteAuthor = function(author, onSuccess, onFail) {
-        return $http.delete(urlBase + '/persons/' + author.id, author).then(onSuccess, onFail);
+        return $http.delete(urlBase + '/authors/' + author.id, author).then(onSuccess, onFail);
     };
 
     this.editAuthor = function(oldAuthor, author, onSuccess, onFail) {
-        return $http.put(urlBase + '/persons/' + oldAuthor.id, author).then(onSuccess, onFail);
+        return $http.put(urlBase + '/authors/' + oldAuthor.id, author).then(onSuccess, onFail);
     };
 
 });
